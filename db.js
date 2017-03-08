@@ -12,19 +12,20 @@ module.exports = {
 
             console.log("Connected successfully to server");
 
-            insertRecord(db, function() {
+            insertRecord(db, json, function() {
                 db.close();
             });
 
         });
         
-        var insertRecord = function(db, json) {
+        var insertRecord = function(db, json, callback) {
 
-          //get the cityWeather collection, if none, create it
-          var collection = db.collection('cityWeather');
+            //get the cityWeather collection, if none, create it
+            var collection = db.collection('cityWeather');
 
-          //insert one cityWeather record
-          collection.insertOne(json);
+            //insert one cityWeather record
+            collection.insertOne(json);
+            callback();
         };
     }
         
