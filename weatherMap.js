@@ -1,5 +1,5 @@
-var http = require('http');
-var db = require('./db.js');
+const http = require('http');
+const db = require('./db.js');
 
 module.exports = {
     
@@ -17,6 +17,8 @@ module.exports = {
         http.request(options, function(res){
             
             var body = '';
+            const absZero = 273.15;
+            
             res.setEncoding('utf8');
             res.on('error', function(err){
                 console.log('There is an error', err);
@@ -30,7 +32,7 @@ module.exports = {
                 var json = {
                     city: city,
                     statusCode: res.statusCode,
-                    temp: Math.round(result.main.temp-275)
+                    temp: Math.round(result.main.temp - absZero)
                 }
                 
                 console.log('\n' + json.city);
@@ -42,9 +44,5 @@ module.exports = {
             })
 
         }).end();
-
-        
     }
-    
-        
 };
